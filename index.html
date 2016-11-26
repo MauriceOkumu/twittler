@@ -1,27 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="jquery.js"></script>
-    <script src="data_generator.js"></script>
-  </head>
-  <body>
-    <script>
+<head>
+  <script src="jquery.js"></script>
+  <script src="data_generator.js"></script>
+  <script src="buttons.js"></script>
+</head>
+<body>
+  <script>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+    $(document).ready(function(){
+      var $body = $('body');
+      $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-
+      var $button = $('<button id="tweet">NewTweets</button>')
+      $button.appendTo($body);
+      $('#tweet').click(function(){
+        location.reload();
       });
 
-    </script>
-  </body>
+      var r = [];
+      var index = streams.home.length - 1;
+      while(index >= 0){
+        var tweet = streams.home[index];
+        var $tweet = $('<div></div>');
+        var time  = new Date().getHours()+":"+new Date().getMinutes()
+        var words = '@' + tweet.user + ': ' + tweet.message+'\xa0\xa0\xa0\xa0\xa0'+'  Created at '+time
+        $tweet.text(words);
+        r.push(words)
+        $tweet.appendTo($body);
+        index -= 1;
+      }
+
+      
+      var stream = streams.home;
+      var $w = $('<div>Click on the button for tweets</div>');
+      
+      var getTweet = function(name){
+        var t = []
+        for(var i = 0; i < stream.length; i++){
+            r.push( '@'+name+''+stream[i].message);
+          if(stream[i].user === name){
+            t.push( '@'+name+''+stream[i].message);
+          }
+        }
+        for(var i = t.length-1; i>=0;i--){
+          var $news = $('<div id="how">how</div>')
+          $news.text(t[i])
+          console.log(t[i])
+          $news.appendTo($w);
+        };
+
+
+      };
+      var showtweets = function(){
+        var h = $('<div>!!</div>')
+        location.reload()
+         h.text(r[0]);
+         h.appendTo($body);
+        };
+   //setTimeout(function(){showtweets()},4000);
+      //getTweet('mracus')
+//getTweet('shawndrost')
+var shawn = $('<button id="shawn">shawndrost</button>')
+shawn.appendTo($body);
+$("#shawn").on("click",function(){
+  $w.text(getTweet('shawndrost'))
+  
+});
+var sharksforcheap = $('<button id="sharksforcheap">sharksforcheap</button>')
+sharksforcheap.appendTo($body);
+$("#sharksforcheap").on("click",function(){
+  $w.text('')
+  getTweet('sharksforcheap')
+});
+var mracus = $('<button id="mracus"><span>mracus</span></button>')
+mracus.appendTo($body);
+$("#mracus").on("click",function(){
+  $w.text('')
+  getTweet('mracus')
+});
+var douglascalhoun = $('<button id="douglascalhoun">douglascalhoun</button>')
+douglascalhoun.appendTo($body);
+$("#douglascalhoun").on("click",function(){
+  $w.text('')
+  getTweet('douglascalhoun')
+});
+      $w.appendTo($body);
+console.log(r)
+
+
+});
+
+</script>
+</body>
 </html>
