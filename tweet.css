@@ -3,10 +3,28 @@ body{
 }
 .a{
 	color:green;
+    padding: 0.50px;
+    font-style:italic;
+    font-size: 1.2em;
 }
 .b{
 	color:blue;
+	float:left;
+	margin: 10px 20px;
+    padding: 20px;
+    width: 180px;
+    font-style:italic;
+    font-size: 1.2em;
 }
 #h{
 	color:orange;
+	float:right;
+	margin: 10px 20px;
+    padding: 20px;
+    width: 280px;
+    font-size: 1.2em;
+
+}
+p{
+	color: purple;
 }
