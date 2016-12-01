@@ -4,11 +4,11 @@
   <script src="jquery.js"></script>
   <script src="data_generator.js"></script>
   <script src="buttons.js"></script>
+  <link rel="stylesheet" href="tweet.css">
 </head>
 <body>
   <script>
-
-    $(document).ready(function(){
+      $(document).ready(function(){
       var $body = $('body');
       $body.html('');
 
@@ -22,7 +22,7 @@
       var index = streams.home.length - 1;
       while(index >= 0){
         var tweet = streams.home[index];
-        var $tweet = $('<div></div>');
+        var $tweet = $('<div class="a"></div>');
         var time  = new Date().getHours()+":"+new Date().getMinutes()
         var words = '@' + tweet.user + ': ' + tweet.message+'\xa0\xa0\xa0\xa0\xa0'+'  Created at '+time
         $tweet.text(words);
@@ -33,12 +33,14 @@
 
       
       var stream = streams.home;
-      var $w = $('<div>Click on the button for tweets</div>');
+      var $w = $('<div class="b">Click on the button for tweets</div>');
+      // var$t = $('<table><tr><td id="tbl"></td></tr></table>');
+      // var $w = $("#tbl")
       
       var getTweet = function(name){
         var t = []
         for(var i = 0; i < stream.length; i++){
-            r.push( '@'+name+''+stream[i].message);
+          r.push( '@'+name+''+stream[i].message);
           if(stream[i].user === name){
             t.push( '@'+name+''+stream[i].message);
           }
@@ -46,25 +48,29 @@
         for(var i = t.length-1; i>=0;i--){
           var $news = $('<div id="how">how</div>')
           $news.text(t[i])
-          console.log(t[i])
           $news.appendTo($w);
         };
 
 
       };
       var showtweets = function(){
-        var h = $('<div>!!</div>')
-        location.reload()
-         h.text(r[0]);
+        var h = $('<div id="h">!!</div>')
+        //var h = $('<table><tr><td id="tbl"></td></tr></table>')
+        //location.reload()
+        var randomIndex = Math.floor(Math.random()*r.length);
+         h.text(r[randomIndex]);
          h.appendTo($body);
-        };
-   //setTimeout(function(){showtweets()},4000);
+       
+     };
+     setInterval(function(){showtweets()},4000);
       //getTweet('mracus')
 //getTweet('shawndrost')
 var shawn = $('<button id="shawn">shawndrost</button>')
 shawn.appendTo($body);
 $("#shawn").on("click",function(){
-  $w.text(getTweet('shawndrost'))
+  //reset();
+  $w.html('')
+  $w.html(getTweet('shawndrost'))
   
 });
 var sharksforcheap = $('<button id="sharksforcheap">sharksforcheap</button>')
@@ -85,11 +91,21 @@ $("#douglascalhoun").on("click",function(){
   $w.text('')
   getTweet('douglascalhoun')
 });
-      $w.appendTo($body);
-console.log(r)
+$w.appendTo($body);
 
-
+var $visitor = $('<form id="vis"><input type="text" name="name" placeholder="yourname" required></input><input id="more" type="text" name="posttweet" placeholder="tweet"></input><input type="submit" value="submit"></input></form>')
+$visitor.appendTo($body);
+$("#vis").on("submit",function(e){
+  e.preventDefault();
+  $w.text($("#more")[0].value)
+  reset()
+})
+function reset(){
+  document.getElementsByTagName("input")[0].value=""
+  $("#more")[0].value="";
+};
 });
+    
 
 </script>
 </body>

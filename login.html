@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Log in to Twittler
+	</title>
+	<script src="jquery.js"></script>
+	<script src="index.html"></script>
+	<script src="tweet.css"></script>
+</head>
+<body>
+<h2>Welcome to Twittler</h2>
+<h3>Log in below to continue</h3>
+<form id="d">
+	<input type="text" name="name" placeholder="name" required>
+	<input type="text" name="email" placeholder="email" required>
+	<button type="button"  onclick="location.href='Users/admin/Desktop/Hr52/HRSF52-twittler/index.html'">login</button>
+</form>
+<script>
+$(document).ready(function(){
+
+	$("#d").on("submit",function(){
+  console.log('logged')
+	});
+})
+</script>
+
+</body>
+</html>
